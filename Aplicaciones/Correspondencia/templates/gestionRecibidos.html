@@ -1,0 +1,67 @@
+{% extends "./base.html" %}
+
+{% block title %}Gestion de Cursos{% endblock %}
+
+{% block body %}
+
+<div class="row ">
+    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+        <h2>Nuevo Registro</h2>
+        <div class="card text-white bg- ">
+            <div class="card-body">
+                <!--Action hacia donde se va a enviar csrf_token para seguridad-->
+                <form action="/registrarCurso/" method="POST">{% csrf_token %}
+                    <div class="form-group" style="margin-bottom: 15px;">
+                        <input type="text" id="txtCodigo" name="txtCodigo" class="form-control" placeholder="Codigo"
+                            minlength="6" maxlength="6" required>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 15px;">
+                        <input type="text" id="txtNombre" name="txtNombre" class="form-control" placeholder="Nombre"
+                            minlength="1" maxlength="50" required>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 15px;">
+                        <input type="text" id="numCreditos" name="numCreditos" class="form-control" minlength="1"
+                            maxlength="9" value="1" required>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-block text-white">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-sm-12 col-md-6 col-lg-8 col-xl-8">
+        <div class="table-responsive">
+            <h1>Listado</h1>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Registro</th>
+                        <th>Referencia</th>
+                        <th>Institucion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for c in documentos %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{ c.codigo}}</td>
+                        <td>{{ c.referencia}}</td>
+                        <td>{{ c.institucion}}</td>
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
