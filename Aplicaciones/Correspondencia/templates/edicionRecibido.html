@@ -1,0 +1,63 @@
+{% extends "./base.html" %}
+
+{% block title %} Gestion Correspondencia {% endblock%}
+
+{% block body %}
+
+<div class="row">
+    <div class="col-md-12 offset-md-12">
+        <h2>Edicion Recibido</h2>
+        <div class="card">
+            <!--Action hacia donde se va a enviar csrf_token para seguridad-->
+            <form action="/editarRecibido/" method="POST"> 
+                {% csrf_token %}
+                <div class="card-body">
+
+                    <div class="form-group" style="margin-bottom: 10px; display: flex; gap: 5px;">
+                        <input type="text" id="txtCodigo" name="txtCodigo" class="form-control" placeholder="Codigo"
+                            minlength="6" maxlength="6" value="{{documentos.codigo}}" required>
+
+                        <input type="date" id="fecha" name="fecha" class="form-control" value="{{ documentos.fecha|date:'Y-m-d' }}" required>
+
+                        <input type="time" id="hora" name="hora" class="form-control" value="{{ documentos.hora|time:'H:i' }}" required>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 10px; display: flex; gap: 5px;">
+                        <input type="text" id="institucion" name="institucion" class="form-control"
+                            placeholder="Institución" minlength="10" maxlength="50" value="{{documentos.institucion}}" required>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 10px;">
+
+                        <input type="text" id="referencia" name="referencia" class="form-control"
+                            placeholder="Referencia" minlength="10" maxlength="50" value="{{documentos.referencia}}" required>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 10px;">
+                        <input type="text" id="remitente" name="remitente" class="form-control" placeholder="Remitente"
+                            minlength="10" maxlength="50" value="{{documentos.remitente}}" required>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 10px;">
+
+                        <input type="text" id="cargoRemitente" name="cargoRemitente" class="form-control"
+                            placeholder="Cargo" minlength="10" maxlength="50" value="{{documentos.cargoRemitente}}" required>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 10px; display: flex; gap: 5px;">
+                        <input type="number" id="fojas" name="fojas" class="form-control" placeholder="Fojas" value="{{documentos.fojas}}" required>
+                        <input type="text" id="estado" name="estado" class="form-control" placeholder="Estado"
+                            minlength="10" maxlength="50" value="{{documentos.estado}}" required>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 10px;">
+
+                        <input type="text" id="observacion" name="observacion" class="form-control"
+                            placeholder="Observacion" maxlength="50" value="{{documentos.observacion}}" required>
+                    </div>
+                </div>
+                <div class="form-group" style="text-align: center; margin-bottom: 15px;">
+                    <button type="submit" class="btn btn-success btn-block text-white">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

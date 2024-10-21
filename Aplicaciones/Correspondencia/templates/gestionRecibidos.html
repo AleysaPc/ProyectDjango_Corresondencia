@@ -4,40 +4,62 @@
 
 {% block body %}
 
-<div class="row ">
-    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+<div class="row">
+    <div class="col-sm-12 col-md-5 col-lg-5 col-xl-5">
         <h2>Nuevo Registro</h2>
-        <div class="card text-white bg- ">
-            <div class="card-body">
-                <!--Action hacia donde se va a enviar csrf_token para seguridad-->
-                <form action="/registrarCurso/" method="POST">{% csrf_token %}
-                    <div class="form-group" style="margin-bottom: 15px;">
+        <div class="card">
+            <!--Action hacia donde se va a enviar csrf_token para seguridad-->
+            <form action="/registroRecibido/" method="POST">
+                {% csrf_token %}
+                <div class="card-body">
+
+                    <div class="form-group" style="margin-bottom: 10px; display: flex; gap: 5px;">
                         <input type="text" id="txtCodigo" name="txtCodigo" class="form-control" placeholder="Codigo"
                             minlength="6" maxlength="6" required>
+
+                        <input type="date" id="fecha" name="fecha" class="form-control" required>
+
+                        <input type="time" id="hora" name="hora" class="form-control" required>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 10px; display: flex; gap: 5px;">
+                        <input type="text" id="institucion" name="institucion" class="form-control"
+                            placeholder="Institución" minlength="10" maxlength="50" required>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 10px;">
+
+                        <input type="text" id="referencia" name="referencia" class="form-control"
+                            placeholder="Referencia" minlength="10" maxlength="50" required>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 10px;">
+                        <input type="text" id="remitente" name="remitente" class="form-control" placeholder="Remitente"
+                            minlength="10" maxlength="50" required>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 10px;">
+
+                        <input type="text" id="cargoRemitente" name="cargoRemitente" class="form-control" placeholder="Cargo"
+                            minlength="10" maxlength="50" required>
                     </div>
 
-                    <div class="form-group" style="margin-bottom: 15px;">
-                        <input type="text" id="txtNombre" name="txtNombre" class="form-control" placeholder="Nombre"
-                            minlength="1" maxlength="50" required>
+                    <div class="form-group" style="margin-bottom: 10px; display: flex; gap: 5px;">
+                        <input type="number" id="fojas" name="fojas" class="form-control" placeholder="Fojas" required>
+                        <input type="text" id="estado" name="estado" class="form-control" placeholder="Estado"
+                            minlength="10" maxlength="50" required>
                     </div>
+                    <div class="form-group" style="margin-bottom: 10px;">
 
-                    <div class="form-group" style="margin-bottom: 15px;">
-                        <input type="text" id="numCreditos" name="numCreditos" class="form-control" minlength="1"
-                            maxlength="9" value="1" required>
+                        <input type="text" id="observacion" name="observacion" class="form-control"
+                            placeholder="Observacion" maxlength="50" required>
                     </div>
-
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-success btn-block text-white">Guardar</button>
-                    </div>
-                </form>
-            </div>
+                </div>
+                <div class="form-group" style="text-align: center; margin-bottom: 15px;">
+                    <button type="submit" class="btn btn-success btn-block text-white">Guardar</button>
+                </div>
+            </form>
         </div>
-
     </div>
-
-    <div class="col-sm-12 col-md-6 col-lg-8 col-xl-8">
+    <div class="col-sm-12 col-md-7 col-lg-7 col-xl-7">
         <div class="table-responsive">
-            <h1>Listado</h1>
+            <h3>Registros</h3>
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -45,6 +67,7 @@
                         <th>Registro</th>
                         <th>Referencia</th>
                         <th>Institucion</th>
+                        <th colspan="2">Opciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -54,13 +77,14 @@
                         <td>{{ c.codigo}}</td>
                         <td>{{ c.referencia}}</td>
                         <td>{{ c.institucion}}</td>
+                        <td><a href="edicionRecibido/{{c.codigo}}" class="btn btn-info">Editar</a></td>
+                        <td><a href="eliminarDocumento/{{c.codigo}}" class="btn btn-danger">Eliminar</a></td>
                     </tr>
                     {% endfor %}
 
                 </tbody>
             </table>
         </div>
-
     </div>
 </div>
 
