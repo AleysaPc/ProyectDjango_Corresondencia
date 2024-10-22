@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Documentos
+from django.contrib import messages
 
 # Create your views here.
 def home(request):
@@ -23,6 +24,7 @@ def registroRecibido(request):
         institucion=institucion,remitente=remitente,cargoRemitente=cargoRemitente,
         observacion=observacion,fojas=fojas,estado=estado
     )
+    messages.success(request, "Documento Registrado!")
     return redirect('/')
 
 def edicionRecibido (request, codigo): 
@@ -56,5 +58,13 @@ def editarRecibido(request):
      documentos.estado = estado
      
      documentos.save()
+     messages.success(request, "Documento Editado!")
      return redirect('/')
+
+def eliminarRecibido(request, codigo):
+     documentos = Documentos.objects.get(codigo=codigo)
+     documentos.delete()
+     messages.success(request, "Documento Eliminado!")
+     return redirect('/')
+     
      

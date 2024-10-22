@@ -6,6 +6,17 @@
 
 <div class="row">
     <div class="col-sm-12 col-md-5 col-lg-5 col-xl-5">
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-dismissible alert-success">
+            <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <strong class="text-dark">{{ message }}</strong>
+        </div>
+        {% endfor %}
+        {% endif %}
+
         <h2>Nuevo Registro</h2>
         <div class="card">
             <!--Action hacia donde se va a enviar csrf_token para seguridad-->
@@ -36,8 +47,8 @@
                     </div>
                     <div class="form-group" style="margin-bottom: 10px;">
 
-                        <input type="text" id="cargoRemitente" name="cargoRemitente" class="form-control" placeholder="Cargo"
-                            minlength="10" maxlength="50" required>
+                        <input type="text" id="cargoRemitente" name="cargoRemitente" class="form-control"
+                            placeholder="Cargo" minlength="10" maxlength="50" required>
                     </div>
 
                     <div class="form-group" style="margin-bottom: 10px; display: flex; gap: 5px;">
@@ -62,7 +73,7 @@
             <h3>Registros</h3>
             <table class="table table-striped">
                 <thead>
-                    <tr>
+                    <tr style="background-color: #87CEEB; color: white;">
                         <th>#</th>
                         <th>Registro</th>
                         <th>Referencia</th>
@@ -78,7 +89,8 @@
                         <td>{{ c.referencia}}</td>
                         <td>{{ c.institucion}}</td>
                         <td><a href="edicionRecibido/{{c.codigo}}" class="btn btn-info">Editar</a></td>
-                        <td><a href="eliminarDocumento/{{c.codigo}}" class="btn btn-danger">Eliminar</a></td>
+                        <td><a href="eliminarRecibido/{{c.codigo}}" class="btn btn-danger btnEliminacion">Eliminar</a>
+                        </td>
                     </tr>
                     {% endfor %}
 
@@ -87,5 +99,18 @@
         </div>
     </div>
 </div>
+<script>
+    // Esperar 5 segundos (5000 ms) antes de desaparecer el mensaje
+    setTimeout(function() {
+        const alerts = document.querySelectorAll('.alert');
+        alerts.forEach(function(alert) {
+            alert.classList.remove('show');
+            alert.classList.add('fade');
+            setTimeout(() => {
+                alert.style.display = 'none';
+            }, 150); // El tiempo que toma la transición
+        });
+    }, 5000);
+</script>
 
 {% endblock %}

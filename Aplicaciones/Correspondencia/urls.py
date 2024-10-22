@@ -6,4 +6,5 @@ urlpatterns = [
     path('registroRecibido/', views.registroRecibido),
     path('edicionRecibido/<codigo>', views.edicionRecibido), 
     path('editarRecibido/', views.editarRecibido),
+    path('eliminarRecibido/<codigo>', views.eliminarRecibido),
 ]
